@@ -3,6 +3,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { LoginModule } from './login/login.module';
 import { GroupModule } from './group/group.module';
+import { ProductsModule } from './products/products.module';
+import {LinesModule} from'./lines/lines.module'
+
 
 @Module({
   imports: [
@@ -11,7 +14,7 @@ import { GroupModule } from './group/group.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'nieto1997',
+      password: '',
       database: 'menublank',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
@@ -19,6 +22,8 @@ import { GroupModule } from './group/group.module';
     AuthModule,
     LoginModule,
     GroupModule,
+    ProductsModule,
+    LinesModule
   ],
   controllers: [],
   providers: [],
