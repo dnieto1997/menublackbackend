@@ -7,8 +7,8 @@ export class Product {
     @Column({ type: 'varchar' })
     img: string;
 
-    @Column({ type: 'int' })
-    code: number;
+    @Column({ type: 'varchar' })
+    code: string;
 
     @Column({ type: 'int' })
     group: number;

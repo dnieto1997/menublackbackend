@@ -8,8 +8,8 @@ export class CreateProductDto {
     img: string;
   
     @IsNotEmpty()
-    @IsNumber()
-    code: number;
+    @IsString()
+    code: string;
 
     @IsNotEmpty()
     @IsNumber()
