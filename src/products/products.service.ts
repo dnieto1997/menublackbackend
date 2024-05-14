@@ -4,6 +4,7 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './entities/product.entity';
 import { Repository } from 'typeorm';
+import { UpdateStatusProductDto } from './dto/update-status.dto';
 
 @Injectable()
 export class ProductsService {
@@ -15,13 +16,13 @@ export class ProductsService {
       img: createProductDto.img,
       code: createProductDto.code,
       group: createProductDto.group,
-      lines:createProductDto.line,
+      lines: createProductDto.line,
       name: createProductDto.name,
       price: createProductDto.price,
-      stars:Number(createProductDto.stars),
-      new:createProductDto.new,
-      promotion:createProductDto.promotion,
-      observation:createProductDto.observations
+      stars: Number(createProductDto.stars),
+      new: createProductDto.new,
+      promotion: createProductDto.promotion,
+      observation: createProductDto.observations,
     });
     this.ProductRepository.save(newProduct);
 
@@ -43,8 +44,46 @@ export class ProductsService {
     return existUser;
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+  async update(id: number, updateProductDto: UpdateProductDto) {
+    console.log(id);
+    console.log(updateProductDto);
+    const existUser = await this.ProductRepository.findOneBy({ id: id });
+
+    if (!existUser) {
+      throw new HttpException('Group not found', HttpStatus.NOT_FOUND);
+    }
+
+    const updateUser = await this.ProductRepository.preload({
+      id: id,
+      img: updateProductDto.img,
+      code: updateProductDto.code,
+      group: updateProductDto.group,
+      lines: updateProductDto.line,
+      name: updateProductDto.name,
+      price: updateProductDto.price,
+      stars: Number(updateProductDto.stars),
+      new: updateProductDto.new,
+      promotion: updateProductDto.promotion,
+      observation: updateProductDto.observations,
+    });
+
+    const saveUser2 = await this.ProductRepository.save(updateUser);
+
+    return { status: 201, message: 'Product Updated', data: saveUser2 };
+  }
+
+  async updateUser(id: number, updateProductDto: UpdateStatusProductDto) {
+    const existUser = await this.ProductRepository.findOneBy({ id: id });
+
+    if (!existUser) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
+
+    if (updateProductDto.status !== undefined) {
+      existUser.status = !updateProductDto.status;
+    }
+
+    return await this.ProductRepository.save(existUser);
   }
 
   remove(id: number) {

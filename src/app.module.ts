@@ -4,8 +4,7 @@ import { AuthModule } from './auth/auth.module';
 import { LoginModule } from './login/login.module';
 import { GroupModule } from './group/group.module';
 import { ProductsModule } from './products/products.module';
-import {LinesModule} from'./lines/lines.module'
-
+import { LinesModule } from './lines/lines.module';
 
 @Module({
   imports: [
@@ -14,7 +13,7 @@ import {LinesModule} from'./lines/lines.module'
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: '',
+      password: 'nieto1997',
       database: 'menublank',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
@@ -23,7 +22,7 @@ import {LinesModule} from'./lines/lines.module'
     LoginModule,
     GroupModule,
     ProductsModule,
-    LinesModule
+    LinesModule,
   ],
   controllers: [],
   providers: [],
