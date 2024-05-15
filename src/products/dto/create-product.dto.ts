@@ -1,44 +1,47 @@
-import { IsNotEmpty, IsString, IsNumber, IsDecimal, IsBoolean } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsString,
+  IsNumber,
+  IsDecimal,
+  IsBoolean,
+} from 'class-validator';
 export class CreateProductDto {
+  @IsNotEmpty()
+  @IsString()
+  img: string;
 
+  @IsNotEmpty()
+  @IsString()
+  code: string;
 
-  
-    @IsNotEmpty()
-    @IsString()
-    img: string;
-  
-    @IsNotEmpty()
-    @IsString()
-    code: string;
+  @IsNotEmpty()
+  @IsNumber()
+  group: number;
 
-    @IsNotEmpty()
-    @IsNumber()
-    group: number;
+  @IsNotEmpty()
+  @IsNumber()
+  line: number;
 
-    @IsNotEmpty()
-    @IsNumber()
-    line: number;
-  
-    @IsNotEmpty()
-    @IsString()
-    name: string;
+  @IsNotEmpty()
+  @IsString()
+  name: string;
 
-    @IsNotEmpty()
-    @IsString()
-    price: string;
+  @IsNotEmpty()
+  @IsString()
+  price: string;
 
-    @IsNotEmpty()
-    @IsDecimal()
-    stars: string;
-  
-    @IsNotEmpty()
-    @IsBoolean()
-    new: boolean;
+  @IsNotEmpty()
+  @IsDecimal()
+  stars: string;
 
-    @IsNotEmpty()
-    @IsBoolean()
-    promotion: boolean;
+  @IsNotEmpty()
+  @IsBoolean()
+  new: boolean;
 
-    @IsString()
-    observations: string;
+  @IsNotEmpty()
+  @IsBoolean()
+  promotion: boolean;
+
+  @IsString()
+  observations: string;
 }

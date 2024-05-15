@@ -5,6 +5,8 @@ import { LoginModule } from './login/login.module';
 import { GroupModule } from './group/group.module';
 import { ProductsModule } from './products/products.module';
 import { LinesModule } from './lines/lines.module';
+import { VariantesModule } from './variantes/variantes.module';
+import { ProductosVariantesModule } from './productos_variantes/productos_variantes.module';
 
 @Module({
   imports: [
@@ -23,6 +25,8 @@ import { LinesModule } from './lines/lines.module';
     GroupModule,
     ProductsModule,
     LinesModule,
+    VariantesModule,
+    ProductosVariantesModule,
   ],
   controllers: [],
   providers: [],
