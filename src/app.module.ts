@@ -9,6 +9,8 @@ import { VariantesModule } from './variantes/variantes.module';
 import { ProductosVariantesModule } from './productos_variantes/productos_variantes.module';
 import { SlidersModule } from './sliders/sliders.module';
 import { MenuModule } from './menu/menu.module';
+import { BannerModule } from './banner/banner.module';
+import { ClientModule } from './client/client.module';
 
 @Module({
   imports: [
@@ -31,6 +33,8 @@ import { MenuModule } from './menu/menu.module';
     ProductosVariantesModule,
     SlidersModule,
     MenuModule,
+    BannerModule,
+    ClientModule,
   ],
   controllers: [],
   providers: [],

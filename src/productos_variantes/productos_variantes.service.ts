@@ -19,7 +19,7 @@ export class ProductosVariantesService {
     });
     this.VarianteProductRepository.save(newVariante);
 
-    return { status: 201, message: 'Product Created' };
+    return { status: 201, message: 'Product Variant Created' };
   }
 
   async findAll() {
