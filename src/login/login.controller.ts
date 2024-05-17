@@ -24,7 +24,7 @@ export class LoginController {
   create(@Body() createLoginDto: CreateLoginDto) {
     return this.loginService.create(createLoginDto);
   }
-
+  @UseGuards(AuthGuard)
   @Get()
   findAll() {
     return this.loginService.findAll();

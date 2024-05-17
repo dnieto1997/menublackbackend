@@ -24,7 +24,7 @@ export class GroupController {
   create(@Body() createGroupDto: CreateGroupDto) {
     return this.groupService.create(createGroupDto);
   }
-
+  @UseGuards(AuthGuard)
   @Get()
   findAll() {
     return this.groupService.findAll();

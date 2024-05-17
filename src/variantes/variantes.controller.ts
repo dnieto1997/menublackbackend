@@ -18,22 +18,22 @@ import { AuthGuard } from 'src/auth/jwt.guard';
 @Controller('variantes')
 export class VariantesController {
   constructor(private readonly variantesService: VariantesService) {}
-
+  @UseGuards(AuthGuard)
   @Post()
   create(@Body() createVarianteDto: CreateVarianteDto) {
     return this.variantesService.create(createVarianteDto);
   }
-
+  @UseGuards(AuthGuard)
   @Get()
   findAll() {
     return this.variantesService.findAll();
   }
-
+  @UseGuards(AuthGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.variantesService.findOne(+id);
   }
-
+  @UseGuards(AuthGuard)
   @Put('status/:id')
   updatestatus(
     @Param('id') id: string,
@@ -41,7 +41,7 @@ export class VariantesController {
   ) {
     return this.variantesService.updateUser(+id, updateLoginDto);
   }
-
+  @UseGuards(AuthGuard)
   @Put(':id')
   update(
     @Param('id') id: string,
@@ -49,7 +49,7 @@ export class VariantesController {
   ) {
     return this.variantesService.update(+id, updateVarianteDto);
   }
-
+  @UseGuards(AuthGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.variantesService.remove(+id);

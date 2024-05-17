@@ -7,6 +7,8 @@ import { ProductsModule } from './products/products.module';
 import { LinesModule } from './lines/lines.module';
 import { VariantesModule } from './variantes/variantes.module';
 import { ProductosVariantesModule } from './productos_variantes/productos_variantes.module';
+import { SlidersModule } from './sliders/sliders.module';
+import { MenuModule } from './menu/menu.module';
 
 @Module({
   imports: [
@@ -27,6 +29,8 @@ import { ProductosVariantesModule } from './productos_variantes/productos_varian
     LinesModule,
     VariantesModule,
     ProductosVariantesModule,
+    SlidersModule,
+    MenuModule,
   ],
   controllers: [],
   providers: [],

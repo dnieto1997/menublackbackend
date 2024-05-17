@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Put } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  Put,
+} from '@nestjs/common';
 import { LinesService } from './lines.service';
 import { CreateLineDto } from './dto/create-line.dto';
 import { UpdateLineDto } from './dto/update-line.dto';
@@ -8,17 +18,17 @@ import { UpdateStatusLineDto } from './dto/update-status.dto';
 @Controller('lines')
 export class LinesController {
   constructor(private readonly linesService: LinesService) {}
-
+  @UseGuards(AuthGuard)
   @Post()
   create(@Body() createLineDto: CreateLineDto) {
     return this.linesService.create(createLineDto);
   }
-
+  @UseGuards(AuthGuard)
   @Get()
   findAll() {
     return this.linesService.findAll();
   }
-
+  @UseGuards(AuthGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.linesService.findOne(+id);
@@ -38,7 +48,7 @@ export class LinesController {
   update(@Param('id') id: string, @Body() updateLineDto: UpdateLineDto) {
     return this.linesService.update(+id, updateLineDto);
   }
-
+  @UseGuards(AuthGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.linesService.remove(+id);
