@@ -23,7 +23,7 @@ export class Client {
   @Column()
   medioDePago: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, type: 'text' })
   observaciones: string;
 
   @Column({ default: true })

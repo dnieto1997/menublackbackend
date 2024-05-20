@@ -45,12 +45,10 @@ export class ProductsService {
   }
 
   async update(id: number, updateProductDto: UpdateProductDto) {
-    console.log(id);
-    console.log(updateProductDto);
     const existUser = await this.ProductRepository.findOneBy({ id: id });
 
     if (!existUser) {
-      throw new HttpException('Group not found', HttpStatus.NOT_FOUND);
+      throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
     }
 
     const updateUser = await this.ProductRepository.preload({
