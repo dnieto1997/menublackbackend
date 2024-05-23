@@ -19,7 +19,7 @@ export class LoginService {
     const existUser = await this.logiDashRepository.findOneBy({ user });
 
     if (existUser) {
-      throw new HttpException('User does not exist', HttpStatus.CONFLICT);
+      throw new HttpException('User Already Exist', HttpStatus.CONFLICT);
     }
 
     const newUser = this.logiDashRepository.create(createLoginDashDto);
