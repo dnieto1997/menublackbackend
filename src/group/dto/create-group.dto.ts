@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsArray } from 'class-validator';
+import { IsNotEmpty, IsString, IsArray, IsOptional } from 'class-validator';
 export class CreateGroupDto {
   @IsNotEmpty()
   @IsString()
@@ -21,6 +21,7 @@ export class CreateGroupDto {
   @IsArray()
   hours: string[];
 
+  @IsOptional()
   @IsString()
   observations: string;
 }

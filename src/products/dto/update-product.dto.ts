@@ -6,6 +6,7 @@ import {
   IsNumber,
   IsDecimal,
   IsBoolean,
+  IsOptional,
 } from 'class-validator';
 
 export class UpdateProductDto extends PartialType(CreateProductDto) {
@@ -45,6 +46,7 @@ export class UpdateProductDto extends PartialType(CreateProductDto) {
   @IsBoolean()
   promotion: boolean;
 
+  @IsOptional()
   @IsString()
   observations: string;
 }

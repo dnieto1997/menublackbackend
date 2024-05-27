@@ -4,6 +4,7 @@ import {
   IsNumber,
   IsDecimal,
   IsBoolean,
+  IsOptional,
 } from 'class-validator';
 export class CreateProductDto {
   @IsNotEmpty()
@@ -41,7 +42,7 @@ export class CreateProductDto {
   @IsNotEmpty()
   @IsBoolean()
   promotion: boolean;
-
+  @IsOptional()
   @IsString()
   observations: string;
 }
