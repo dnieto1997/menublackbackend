@@ -69,7 +69,17 @@ export class VariantesService {
     return { status: 201, message: 'Variant Updated', data: saveUser2 };
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} variante`;
+  async remove(id: number) {
+    const existUser = await this.VarianteRepository.findOneBy({ id: id });
+
+    if (!existUser) {
+      throw new HttpException('Variant does not exist', HttpStatus.NOT_FOUND);
+    }
+
+    await this.VarianteRepository.delete(id);
+
+    return {
+      message: 'Variant deleted successfully',
+    };
   }
 }

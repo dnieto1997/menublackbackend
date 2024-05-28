@@ -87,7 +87,22 @@ export class ProductosVariantesService {
     return await this.VarianteProductRepository.save(existUser);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} productosVariante`;
+  async remove(id: number) {
+    const existUser = await this.VarianteProductRepository.findOneBy({
+      id: id,
+    });
+
+    if (!existUser) {
+      throw new HttpException(
+        'Product Group does not exist',
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    await this.VarianteProductRepository.delete(id);
+
+    return {
+      message: 'Variant deleted successfully',
+    };
   }
 }

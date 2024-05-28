@@ -84,7 +84,17 @@ export class ProductsService {
     return await this.ProductRepository.save(existUser);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  async remove(id: number) {
+    const existUser = await this.ProductRepository.findOneBy({ id: id });
+
+    if (!existUser) {
+      throw new HttpException('Product does not exist', HttpStatus.NOT_FOUND);
+    }
+
+    await this.ProductRepository.delete(id);
+
+    return {
+      message: 'Product deleted successfully',
+    };
   }
 }

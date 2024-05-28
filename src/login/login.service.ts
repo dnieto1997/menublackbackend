@@ -91,21 +91,13 @@ export class LoginService {
     const existUser = await this.logiDashRepository.findOneBy({ id: id });
 
     if (!existUser) {
-      throw new HttpException('User does not exist', HttpStatus.CONFLICT);
+      throw new HttpException('User does not exist', HttpStatus.NOT_FOUND);
     }
 
-    let status = true;
+    await this.logiDashRepository.delete(id);
 
-    if (existUser.status == true) {
-      status = false;
-    } else {
-      status = true;
-    }
-    const updateUser = await this.logiDashRepository.preload({
-      id: id,
-      status: status,
-    });
-
-    return await this.logiDashRepository.save(updateUser);
+    return {
+      message: 'User deleted successfully',
+    };
   }
 }

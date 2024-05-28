@@ -13,19 +13,19 @@ export class LinesService {
   ) {}
   create(createLineDto: CreateLineDto) {
     const newGroup = this.lineDashRepository.create({
-       position:createLineDto.position,
+      position: createLineDto.position,
       group: createLineDto.group,
       name: createLineDto.name,
       code: createLineDto.code,
-      img:createLineDto.img,
-      observation:createLineDto.observations
+      img: createLineDto.img,
+      observation: createLineDto.observations,
     });
     this.lineDashRepository.save(newGroup);
 
     return { status: 201, message: 'Line Created' };
   }
 
- async findAll() {
+  async findAll() {
     const user = await this.lineDashRepository.find();
     return user;
   }
@@ -44,7 +44,6 @@ export class LinesService {
     return await this.lineDashRepository.save(existUser);
   }
 
-
   async findOne(id: number) {
     const existUser = await this.lineDashRepository.findOneBy({ id: id });
 
@@ -55,8 +54,7 @@ export class LinesService {
     return existUser;
   }
 
- async update(id: number, updateLineDto: UpdateLineDto) {
-  
+  async update(id: number, updateLineDto: UpdateLineDto) {
     const existUser = await this.lineDashRepository.findOneBy({ id: id });
 
     if (!existUser) {
@@ -78,7 +76,17 @@ export class LinesService {
     return { status: 201, message: 'updated line', data: saveUser2 };
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} line`;
+  async remove(id: number) {
+    const existUser = await this.lineDashRepository.findOneBy({ id: id });
+
+    if (!existUser) {
+      throw new HttpException('Group does not exist', HttpStatus.NOT_FOUND);
+    }
+
+    await this.lineDashRepository.delete(id);
+
+    return {
+      message: 'Line deleted successfully',
+    };
   }
 }

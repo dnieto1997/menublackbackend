@@ -20,7 +20,7 @@ export class Line {
   @Column({ type: 'varchar' })
   name: string;
 
-  @Column({ type: 'varchar', default: '' })
+  @Column({ type: 'varchar', nullable: true })
   observation: string;
 
   @Column({ default: true })

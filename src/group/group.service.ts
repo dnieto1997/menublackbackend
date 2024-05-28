@@ -78,7 +78,17 @@ export class GroupService {
     return await this.groupDashRepository.save(existUser);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} group`;
+  async remove(id: number) {
+    const existUser = await this.groupDashRepository.findOneBy({ id: id });
+
+    if (!existUser) {
+      throw new HttpException('Group does not exist', HttpStatus.NOT_FOUND);
+    }
+
+    await this.groupDashRepository.delete(id);
+
+    return {
+      message: 'Group deleted successfully',
+    };
   }
 }

@@ -3,7 +3,7 @@ import { CreateLineDto } from './create-line.dto';
 import { IsArray, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class UpdateLineDto extends PartialType(CreateLineDto) {
-    @IsOptional()
+  @IsOptional()
   @IsString()
   img: string;
 
@@ -24,5 +24,6 @@ export class UpdateLineDto extends PartialType(CreateLineDto) {
   name: string;
 
   @IsOptional()
+  @IsString()
   observations: string;
 }
