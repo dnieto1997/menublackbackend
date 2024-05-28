@@ -1,15 +1,19 @@
 import { PartialType } from '@nestjs/swagger';
 import { CreateProductosVarianteDto } from './create-productos_variante.dto';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsArray, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class UpdateProductosVarianteDto extends PartialType(
   CreateProductosVarianteDto,
 ) {
   @IsNotEmpty()
-  @IsNumber()
-  producto_id: number;
+  @IsString()
+  name: string;
 
   @IsNotEmpty()
-  @IsNumber()
-  producto_variante: number;
+  @IsArray()
+  producto_variante: string[];
+
+  @IsNotEmpty()
+  @IsString()
+  tipo: string;
 }

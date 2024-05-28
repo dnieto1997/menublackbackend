@@ -1,10 +1,13 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsArray, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 export class CreateProductosVarianteDto {
   @IsNotEmpty()
-  @IsNumber()
-  producto_id: number;
+  @IsString()
+  name: string;
+
+  @IsArray()
+  producto_variante: string[];
 
   @IsNotEmpty()
-  @IsNumber()
-  producto_variante: number;
+  @IsString()
+  tipo: string;
 }

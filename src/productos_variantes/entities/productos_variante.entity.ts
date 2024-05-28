@@ -1,14 +1,17 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-@Entity('products_variants')
+@Entity('products_groups')
 export class ProductosVariante {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  product_id: number;
+  name: string;
+
+  @Column({ type: 'varchar' })
+  product_variante: string;
 
   @Column()
-  product_variante: number;
+  tipo: string;
 
   @Column({ default: true })
   status: boolean;

@@ -14,8 +14,11 @@ export class ProductosVariantesService {
   ) {}
   create(createProductosVarianteDto: CreateProductosVarianteDto) {
     const newVariante = this.VarianteProductRepository.create({
-      product_id: createProductosVarianteDto.producto_id,
-      product_variante: createProductosVarianteDto.producto_variante,
+      name: createProductosVarianteDto.name,
+      product_variante: JSON.stringify(
+        createProductosVarianteDto.producto_variante,
+      ),
+      tipo: createProductosVarianteDto.tipo,
     });
     this.VarianteProductRepository.save(newVariante);
 
@@ -56,13 +59,16 @@ export class ProductosVariantesService {
 
     const updateUser = await this.VarianteProductRepository.preload({
       id: id,
-      product_id: updateProductosVarianteDto.producto_id,
-      product_variante: updateProductosVarianteDto.producto_variante,
+      name: updateProductosVarianteDto.name,
+      product_variante: JSON.stringify(
+        updateProductosVarianteDto.producto_variante,
+      ),
+      tipo: updateProductosVarianteDto.tipo,
     });
 
     const saveUser2 = await this.VarianteProductRepository.save(updateUser);
 
-    return { status: 201, message: 'Prodcut Variant Updated', data: saveUser2 };
+    return { status: 201, message: 'Product Variant Updated', data: saveUser2 };
   }
 
   async updateUser(id: number, updateProductDto: UpdateStatusVariantDto) {
