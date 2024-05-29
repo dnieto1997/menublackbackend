@@ -16,11 +16,11 @@ import { ClientModule } from './client/client.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: 'srv465.hstgr.io',
       port: 3306,
-      username: 'root',
-      password: 'nieto1997',
-      database: 'menublank',
+      username: 'u293118005_menu',
+      password: 'Nieto1997',
+      database: 'u293118005_menuempty',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
