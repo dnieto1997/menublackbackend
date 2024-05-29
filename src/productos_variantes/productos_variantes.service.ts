@@ -102,7 +102,7 @@ export class ProductosVariantesService {
     await this.VarianteProductRepository.delete(id);
 
     return {
-      message: 'Variant deleted successfully',
+      message: 'Product Group deleted successfully',
     };
   }
 }

@@ -5,6 +5,7 @@ import {
   IsDecimal,
   IsBoolean,
   IsOptional,
+  IsArray,
 } from 'class-validator';
 export class CreateProductDto {
   @IsNotEmpty()
@@ -42,6 +43,11 @@ export class CreateProductDto {
   @IsNotEmpty()
   @IsBoolean()
   promotion: boolean;
+
+  @IsOptional()
+  @IsArray()
+  variantes_group: string[];
+
   @IsOptional()
   @IsString()
   observations: string;

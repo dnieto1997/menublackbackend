@@ -31,8 +31,11 @@ export class Product {
   @Column({ default: false })
   promotion: boolean;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: true })
   observation: string;
+
+  @Column({ type: 'varchar', default: null, nullable: true })
+  variantes_group: string;
 
   @Column({ default: true })
   status: boolean;

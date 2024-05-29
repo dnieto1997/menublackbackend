@@ -7,6 +7,7 @@ import {
   IsDecimal,
   IsBoolean,
   IsOptional,
+  IsArray,
 } from 'class-validator';
 
 export class UpdateProductDto extends PartialType(CreateProductDto) {
@@ -45,6 +46,10 @@ export class UpdateProductDto extends PartialType(CreateProductDto) {
   @IsNotEmpty()
   @IsBoolean()
   promotion: boolean;
+
+  @IsOptional()
+  @IsArray()
+  variantes_group: string[];
 
   @IsOptional()
   @IsString()

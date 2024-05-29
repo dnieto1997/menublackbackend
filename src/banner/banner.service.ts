@@ -78,7 +78,17 @@ export class BannerService {
     return await this.BannerRepository.save(existUser);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} banner`;
+  async remove(id: number) {
+    const existUser = await this.BannerRepository.findOneBy({ id: id });
+
+    if (!existUser) {
+      throw new HttpException('Variant does not exist', HttpStatus.NOT_FOUND);
+    }
+
+    await this.BannerRepository.delete(id);
+
+    return {
+      message: 'Banner deleted successfully',
+    };
   }
 }

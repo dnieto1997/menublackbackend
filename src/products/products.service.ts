@@ -12,6 +12,7 @@ export class ProductsService {
     @InjectRepository(Product) private ProductRepository: Repository<Product>,
   ) {}
   create(createProductDto: CreateProductDto) {
+    console.log(createProductDto);
     const newProduct = this.ProductRepository.create({
       img: createProductDto.img,
       code: createProductDto.code,
@@ -22,6 +23,7 @@ export class ProductsService {
       stars: Number(createProductDto.stars),
       new: createProductDto.new,
       promotion: createProductDto.promotion,
+      variantes_group: JSON.stringify(createProductDto.variantes_group),
       observation: createProductDto.observations,
     });
     this.ProductRepository.save(newProduct);
@@ -62,6 +64,7 @@ export class ProductsService {
       stars: Number(updateProductDto.stars),
       new: updateProductDto.new,
       promotion: updateProductDto.promotion,
+      variantes_group: JSON.stringify(updateProductDto.variantes_group),
       observation: updateProductDto.observations,
     });
 
