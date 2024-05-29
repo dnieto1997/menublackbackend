@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { json, urlencoded } from 'body-parser';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as process from 'process';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -32,6 +33,7 @@ async function bootstrap() {
   app.use(urlencoded({ extended: true, limit: '100mb' }));
   app.enableCors();
 
-  await app.listen(3000);
+  await app.listen(process.env.PORT);
+  /*   await app.listen(3000); */
 }
 bootstrap();
