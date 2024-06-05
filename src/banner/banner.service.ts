@@ -5,12 +5,18 @@ import { Banner } from './entities/banner.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UpdateStatusBannerDto } from './dto/update-status.dto';
+import { Line } from 'src/lines/entities/line.entity';
+import { Group } from 'src/group/entities/group.entity';
 
 @Injectable()
 export class BannerService {
   constructor(
     @InjectRepository(Banner)
     private BannerRepository: Repository<Banner>,
+    @InjectRepository(Line)
+    private lineasAppRepository: Repository<Line>,
+    @InjectRepository(Group)
+    private gruposAppRepository: Repository<Group>,
   ) {}
   create(createBannerDto: CreateBannerDto) {
     const newBanner = this.BannerRepository.create({
@@ -25,6 +31,18 @@ export class BannerService {
   async findAll() {
     const user = await this.BannerRepository.find();
     return user;
+  }
+
+  async bannerclick(image: string) {
+    const lineas = await this.BannerRepository.createQueryBuilder('banner')
+      .select(['banner', 'lines', 'group'])
+      .innerJoin('lines', 'lines', 'banner.lines = lines.id')
+      .innerJoin('group', 'group', 'lines.group = group.id')
+      .where('banner.img = :image', { image })
+      .orderBy('lines.position', 'ASC')
+      .getRawMany();
+
+    return lineas;
   }
 
   async findOne(id: number) {

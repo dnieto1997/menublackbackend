@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   Put,
+  Query,
 } from '@nestjs/common';
 import { BannerService } from './banner.service';
 import { CreateBannerDto } from './dto/create-banner.dto';
@@ -19,6 +20,10 @@ import { UpdateStatusBannerDto } from './dto/update-status.dto';
 export class BannerController {
   constructor(private readonly bannerService: BannerService) {}
 
+  @Get('bannerclick')
+  bannerclick(@Query('image') image: string) {
+    return this.bannerService.bannerclick(image);
+  }
   @Post()
   create(@Body() createBannerDto: CreateBannerDto) {
     return this.bannerService.create(createBannerDto);

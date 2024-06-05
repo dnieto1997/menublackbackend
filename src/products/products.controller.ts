@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   Put,
+  Query,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -22,6 +23,11 @@ export class ProductsController {
   @Get('search')
   search() {
     return this.productsService.search();
+  }
+  @UseGuards(AuthGuard)
+  @Get('searchvariant')
+  searchvariant(@Query('id') id: number) {
+    return this.productsService.searchVariant(id);
   }
 
   @UseGuards(AuthGuard)
