@@ -31,6 +31,15 @@ export class GroupService {
     return user;
   }
 
+  async Groups() {
+    const user = await this.groupDashRepository.find({
+      select: ['img', 'code', 'name'],
+      where: { status: true },
+      order: { order: 'asc' },
+    });
+    return user;
+  }
+
   async findOne(id: number) {
     const existUser = await this.groupDashRepository.findOneBy({ id: id });
 

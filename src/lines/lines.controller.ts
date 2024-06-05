@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   Put,
+  Query,
 } from '@nestjs/common';
 import { LinesService } from './lines.service';
 import { CreateLineDto } from './dto/create-line.dto';
@@ -19,6 +20,11 @@ import { UpdateStatusLineDto } from './dto/update-status.dto';
 export class LinesController {
   constructor(private readonly linesService: LinesService) {}
   @UseGuards(AuthGuard)
+  @Get('search')
+  search(@Query('id') id: number, @Query('id2') id2?: number) {
+    return this.linesService.search(id, id2);
+  }
+  @UseGuards(AuthGuard)
   @Post()
   create(@Body() createLineDto: CreateLineDto) {
     return this.linesService.create(createLineDto);
@@ -28,6 +34,7 @@ export class LinesController {
   findAll() {
     return this.linesService.findAll();
   }
+
   @UseGuards(AuthGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {

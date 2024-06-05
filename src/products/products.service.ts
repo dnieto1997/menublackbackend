@@ -36,6 +36,15 @@ export class ProductsService {
     return user;
   }
 
+  async search() {
+    const products = await this.ProductRepository.find({
+      select: ['id', 'name'],
+      where: { status: true },
+    });
+
+    return products;
+  }
+
   async findOne(id: number) {
     const existUser = await this.ProductRepository.findOneBy({ id: id });
 

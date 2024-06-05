@@ -25,6 +25,12 @@ export class GroupController {
     return this.groupService.create(createGroupDto);
   }
   @UseGuards(AuthGuard)
+  @Get('search')
+  groups() {
+    return this.groupService.Groups();
+  }
+
+  @UseGuards(AuthGuard)
   @Get()
   findAll() {
     return this.groupService.findAll();

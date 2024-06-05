@@ -18,6 +18,12 @@ import { UpdateStatusGroupDto } from 'src/group/dto/update-status.dto';
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
+
+  @Get('search')
+  search() {
+    return this.productsService.search();
+  }
+
   @UseGuards(AuthGuard)
   @Post()
   create(@Body() createProductDto: CreateProductDto) {

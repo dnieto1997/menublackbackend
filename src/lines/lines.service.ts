@@ -5,11 +5,19 @@ import { Line } from './entities/line.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UpdateStatusLineDto } from './dto/update-status.dto';
+import { Group } from 'src/group/entities/group.entity';
+import { Product } from 'src/products/entities/product.entity';
+import { Variante } from 'src/variantes/entities/variante.entity';
 
 @Injectable()
 export class LinesService {
   constructor(
     @InjectRepository(Line) private lineDashRepository: Repository<Line>,
+    @InjectRepository(Group) private Group: Repository<Group>,
+    @InjectRepository(Product)
+    private productDashRepository: Repository<Product>,
+    @InjectRepository(Variante)
+    private varianttDashRepository: Repository<Variante>,
   ) {}
   create(createLineDto: CreateLineDto) {
     const newGroup = this.lineDashRepository.create({
@@ -28,6 +36,57 @@ export class LinesService {
   async findAll() {
     const user = await this.lineDashRepository.find();
     return user;
+  }
+
+  async search(id: number, id2?: number) {
+    const arr = [];
+
+    let lineasQuery = this.lineDashRepository
+      .createQueryBuilder('lineas_app')
+      .select(['lineas_app.*'])
+      .innerJoin(Group, 'g', 'g.id = lineas_app.group')
+      .where('lineas_app.group = :id', { id })
+      .andWhere('lineas_app.status = 1')
+      .orderBy('lineas_app.position', 'ASC');
+
+    if (id2) {
+      lineasQuery = lineasQuery.andWhere('lineas_app.code = :id2', { id2 });
+    }
+
+    const lineas = await lineasQuery.getRawMany();
+
+    for (const row2 of lineas) {
+      const arr2 = [];
+
+      const productos = await this.productDashRepository.find({
+        where: { status: true, lines: row2.id },
+        order: { price: 'ASC' },
+      });
+
+      for (const row of productos) {
+        arr2.push({
+          id: row.id,
+          img: row.img,
+          code: row.code,
+          group: row.group,
+          lines: row.lines,
+          name: row.name,
+          price: row.price,
+          stars: row.stars,
+          new: row.new == true ? 'SI' : 'NO',
+          promotion: row.promotion == true ? 'SI' : 'NO',
+          observation: row.observation,
+        });
+      }
+
+      arr.push({
+        nombre: row2.name,
+        descripcion: row2.observations,
+        productos: arr2,
+      });
+    }
+
+    return arr;
   }
 
   async updateStatus(id: number, updateGroupDto: UpdateStatusLineDto) {
