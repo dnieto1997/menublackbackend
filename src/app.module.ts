@@ -21,7 +21,7 @@ import { ClientModule } from './client/client.module';
       username: 'u293118005_menu',
       password: 'Nieto1997',
       database: 'u293118005_menuempty',
-      /*    type: 'mysql',
+      /*       type: 'mysql',
       host: 'localhost',
       port: 3306,
       username: 'root',
