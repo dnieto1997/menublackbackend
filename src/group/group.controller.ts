@@ -24,18 +24,17 @@ export class GroupController {
   create(@Body() createGroupDto: CreateGroupDto) {
     return this.groupService.create(createGroupDto);
   }
-  @UseGuards(AuthGuard)
+
   @Get('search')
   groups() {
     return this.groupService.Groups();
   }
 
-  @UseGuards(AuthGuard)
   @Get()
   findAll() {
     return this.groupService.findAll();
   }
-  @UseGuards(AuthGuard)
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.groupService.findOne(+id);

@@ -15,7 +15,12 @@ import { CreateBannerDto } from './dto/create-banner.dto';
 import { UpdateBannerDto } from './dto/update-banner.dto';
 import { AuthGuard } from 'src/auth/jwt.guard';
 import { UpdateStatusBannerDto } from './dto/update-status.dto';
-
+import {
+  ApiCreatedResponse,
+  ApiForbiddenResponse,
+  ApiTags,
+} from '@nestjs/swagger';
+@ApiTags('banner')
 @Controller('banner')
 export class BannerController {
   constructor(private readonly bannerService: BannerService) {}
@@ -24,6 +29,10 @@ export class BannerController {
   bannerclick(@Query('image') image: string) {
     return this.bannerService.bannerclick(image);
   }
+  @ApiCreatedResponse({
+    description: 'the record has beed successfully created',
+  })
+  @ApiForbiddenResponse({ description: 'forbidden' })
   @Post()
   create(@Body() createBannerDto: CreateBannerDto) {
     return this.bannerService.create(createBannerDto);
