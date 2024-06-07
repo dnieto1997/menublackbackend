@@ -19,7 +19,7 @@ import { UpdateStatusLineDto } from './dto/update-status.dto';
 @Controller('lines')
 export class LinesController {
   constructor(private readonly linesService: LinesService) {}
-  @UseGuards(AuthGuard)
+
   @Get('search')
   search(@Query('id') id: number, @Query('id2') id2?: number) {
     return this.linesService.search(id, id2);
@@ -29,13 +29,12 @@ export class LinesController {
   create(@Body() createLineDto: CreateLineDto) {
     return this.linesService.create(createLineDto);
   }
-  @UseGuards(AuthGuard)
+
   @Get()
   findAll() {
     return this.linesService.findAll();
   }
 
-  @UseGuards(AuthGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.linesService.findOne(+id);

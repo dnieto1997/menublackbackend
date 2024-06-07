@@ -23,12 +23,12 @@ export class VariantesController {
   create(@Body() createVarianteDto: CreateVarianteDto) {
     return this.variantesService.create(createVarianteDto);
   }
-  @UseGuards(AuthGuard)
+
   @Get()
   findAll() {
     return this.variantesService.findAll();
   }
-  @UseGuards(AuthGuard)
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.variantesService.findOne(+id);

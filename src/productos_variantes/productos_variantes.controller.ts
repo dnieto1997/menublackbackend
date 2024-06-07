@@ -25,12 +25,12 @@ export class ProductosVariantesController {
   create(@Body() createProductosVarianteDto: CreateProductosVarianteDto) {
     return this.productosVariantesService.create(createProductosVarianteDto);
   }
-  @UseGuards(AuthGuard)
+
   @Get()
   findAll() {
     return this.productosVariantesService.findAll();
   }
-  @UseGuards(AuthGuard)
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.productosVariantesService.findOne(+id);

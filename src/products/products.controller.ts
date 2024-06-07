@@ -24,7 +24,7 @@ export class ProductsController {
   search() {
     return this.productsService.search();
   }
-  @UseGuards(AuthGuard)
+
   @Get('searchvariant')
   searchvariant(@Query('id') id: number) {
     return this.productsService.searchVariant(id);
