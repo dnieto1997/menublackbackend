@@ -38,6 +38,18 @@ export class LinesService {
     return user;
   }
 
+  async searchgroup(id: number) {
+    const existUser = await this.lineDashRepository.find({
+      where: { group: id },
+    });
+
+    if (!existUser) {
+      throw new HttpException('Group does not exist', HttpStatus.CONFLICT);
+    }
+
+    return existUser;
+  }
+
   async search(id: number, id2?: number) {
     const arr = [];
 

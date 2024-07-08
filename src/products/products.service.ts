@@ -17,7 +17,6 @@ export class ProductsService {
     private productvariantRepository: Repository<ProductosVariante>,
   ) {}
   create(createProductDto: CreateProductDto) {
-    console.log(createProductDto);
     const newProduct = this.ProductRepository.create({
       img: createProductDto.img,
       code: createProductDto.code,
@@ -42,7 +41,6 @@ export class ProductsService {
   }
 
   async searchVariant(id: number) {
-    console.log(id);
     const productos = await this.ProductRepository.find({ where: { id: id } });
     const arrProd = [];
 

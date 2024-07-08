@@ -24,6 +24,11 @@ export class LinesController {
   search(@Query('id') id: number, @Query('id2') id2?: number) {
     return this.linesService.search(id, id2);
   }
+
+  @Get('searchgroup')
+  searchgroup(@Query('id') id: number) {
+    return this.linesService.searchgroup(id);
+  }
   @UseGuards(AuthGuard)
   @Post()
   create(@Body() createLineDto: CreateLineDto) {
